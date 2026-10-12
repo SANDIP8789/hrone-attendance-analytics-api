@@ -1,26 +1,78 @@
-# Candidate kit
+# Employee Attendance & Analytics API
 
-Read in this order:
 
-1. `PROBLEM_STATEMENT.docx`: what you are asked to do, how it is evaluated.
-2. `openapi.yaml`: the API contract and the business rules (R1 - R10).
-3. `DATA_MODEL.md`: what is stored in MongoDB, with nine sample documents.
-4. `app/main.py`: the starter. Put **all** your code in this one file. It must start with `uvicorn app.main:app --port 8000`.
-5. `REVIEW.md`, `DECISIONS.md`: templates to fill in.
+A REST API built with FastAPI and MongoDB for employee management, attendance tracking, regularization, and analytics.
 
-`sample_data/` holds the nine sample documents as MongoDB Extended JSON; `sample_seed.py` loads them. The grader's dataset is
-much larger and contains cases they do not show.
 
-## Local setup
-```bash
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env            # set MONGO_URI / MONGO_DB (local docker: docker run -p 27017:27017 mongo:7)
-python sample_seed.py
-uvicorn app.main:app --port 8000 --reload
-```
-MongoDB **6.0 or newer** is required (the grader uses 7.0). MongoDB Atlas free tier (M0) works.
+## Requirements
+- Python 3.10 or newer
+- MongoDB 6.0 or newer
 
-## Submit
-A public Git repository with `app/main.py`, `requirements.txt`, `REVIEW.md`, `DECISIONS.md` and a short `README.md`.
-No `.env`, no secrets, no Dockerfile.
+
+## Setup
+1. Create a virtual environment: `python -m venv venv`
+2. Activate it: `.\venv\Scripts\Activate.ps1`
+3. Install dependencies: `python -m pip install -r requirements.txt`
+4. Set MongoDB URI: ` $env:MONGO_URI = 'mongodb://localhost:27017' `
+5. Set database name: ` $env:MONGO_DB = 'attendance_db' `
+6. Seed sample data if needed: `python sample_seed.py`
+7. Start the API: `uvicorn app.main:app --host 127.0.0.1 --port 8000`
+
+API documentation: http://127.0.0.1:8000/docs
+
+## Main Endpoints
+- `GET /health`
+- `POST /employees`
+- `GET /employees`
+- `POST /attendance/punch-in`
+- `POST /attendance/punch-out`
+- `GET /attendance`
+- `PATCH /attendance/{emp_code}/{date}`
+- `GET /analytics/employees/{emp_code}/monthly`
+- `GET /analytics/departments/summary`
+- `GET /analytics/leaderboard/late`
+- `GET /analytics/departments/{department}/trend`
+- `GET /admin/explain/{endpoint}`
+
+## Project Files
+- `app/main.py` — API implementation
+- `requirements.txt` — Dependencies
+- `REVIEW.md` — Starter-code review
+- `DECISIONS.md` — Design decisions
+- `DATA_MODEL.md` — Data model
+- `openapi.yaml` — API contract
+
+## Validation
+Python syntax compilation passed and selected API endpoints were tested locally. This does not guarantee all hidden evaluation cases pass.
+
+## Security
+Do not commit `.env` files, credentials, virtual environments, caches, or other secrets.
+
+
+## Main Endpoints
+- `GET /health`
+- `POST /employees`
+- `GET /employees`
+- `POST /attendance/punch-in`
+- `POST /attendance/punch-out`
+- `GET /attendance`
+- `PATCH /attendance/{emp_code}/{date}`
+- `GET /analytics/employees/{emp_code}/monthly`
+- `GET /analytics/departments/summary`
+- `GET /analytics/leaderboard/late`
+- `GET /analytics/departments/{department}/trend`
+- `GET /admin/explain/{endpoint}`
+
+## Project Files
+- `app/main.py` — API implementation
+- `requirements.txt` — Dependencies
+- `REVIEW.md` — Starter-code review
+- `DECISIONS.md` — Design decisions
+- `DATA_MODEL.md` — Data model
+- `openapi.yaml` — API contract
+
+## Validation
+Python syntax compilation passed and selected API endpoints were tested locally. This does not guarantee all hidden evaluation cases pass.
+
+## Security
+Do not commit `.env` files, credentials, virtual environments, caches, or other secrets.

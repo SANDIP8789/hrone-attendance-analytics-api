@@ -746,7 +746,7 @@ def employee_monthly(emp_code: str, month: str):
     working_days = working_result[0]["working_days"] if working_result else 0
     present_days = round_half_up(stats.get("present_days", 0), 2)
     pct = (
-        round_half_up(present_days / working_days * 100, 2)
+        round_half_up(present_days / working_days * 100, 4)
         if working_days else None
     )
     return {
